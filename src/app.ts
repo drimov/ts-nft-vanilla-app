@@ -13,6 +13,14 @@ function createCard(data: nftType) {
   populateCard(card, data)
 }
 
+function clearCards() {
+  const cardContainer = document.querySelector('.card-container') as HTMLElement
+
+  while (cardContainer.firstChild) {
+    cardContainer.removeChild(cardContainer.firstChild)
+  }
+}
+
 function populateCard(card: HTMLElement, data: nftType) {
   const title = card.querySelector('.title') as HTMLHeadingElement
   title.textContent = data.title
@@ -36,6 +44,16 @@ function populateCard(card: HTMLElement, data: nftType) {
   avatar.src = data.avatar
 }
 
+
+clearCards()
+nftsList.map((item) => {
+  return createCard(item)
+})
+clearCards()
+nftsList.map((item) => {
+  return createCard(item)
+})
+clearCards()
 nftsList.map((item) => {
   return createCard(item)
 })
