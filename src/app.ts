@@ -1,73 +1,41 @@
-import { nftType } from "./types/types";
-
-const nftsList: Array<nftType> = [
-  {
-    title: "Donkey #3429",
-    description:
-      "Collection of 10,000 Primates facilitating a seamless adoption of the web3 space through community fueled ventures and collaborations.",
-    creator: "Mike Codeur",
-    img: "/images/primate1.png",
-    price: "0.341 ETH",
-    expire: "10 days left",
-    avatar: "/images/avatar/25.jpg",
-  },
-  {
-    title: "Dolly #1546",
-    description: "Makak Our Equilibrium collection promotes balance and calm.",
-    creator: "John doe",
-    img: "/images/primate2.png",
-    price: "0.041 ETH",
-    expire: "3 days left",
-    avatar: "/images/avatar/18.jpg",
-  },
-  {
-    title: "Makak #2643",
-    description: "'Fever Dream' by tiffatronn",
-    creator: "Dam Abramov",
-    img: "/images/primate3.png",
-    price: "0.005 ETH",
-    expire: "6 days left",
-    avatar: "/images/avatar/50.jpg",
-  },
-  {
-    title: "Ouran #3434",
-    description: "The Hollows are at your service.",
-    creator: "Mark Z",
-    img: "/images/primate4.png",
-    price: "0.154 ETH",
-    expire: "4 days left",
-    avatar: "/images/avatar/85.jpg",
-  },
-  {
-    title: "Outan #9876",
-    description:
-      "MadSkullz #5390 is one of the 6666 NFTs from MadSkullz Collection that are joining SkullzCity to fight for Freedomz.",
-    creator: "Jules P",
-    img: "/images/primate5.png",
-    price: "0.099 ETH",
-    expire: "27 days left",
-    avatar: "/images/avatar/90.jpg",
-  },
-  {
-    title: "Dizzi #3856",
-    description:
-      "Please be aware that there are characters that look identical or very similar to English letters",
-    creator: "Robert Z",
-    img: "/images/primate6.png",
-    price: "0.878 ETH",
-    expire: "1 days left",
-    avatar: "/images/avatar/90.jpg",
-  },
-]
+import { nftsList } from "./bdd/nft.js"
+import { nftType } from "./types/types"
 
 function cloneCard() {
   const card = document.querySelector('.main-card') as HTMLElement
   const cardClone = card.cloneNode(true)
-
-  const cardContainer = document.querySelector('.card-container') as HTMLDivElement
-  return cardContainer.appendChild(cardClone)
+  document.querySelector('.card-container')?.appendChild(cardClone)
+  return cardClone
 }
 
-const card1 = cloneCard()
-const card2 = cloneCard()
-const card3 = cloneCard()
+function createCard(data: nftType) {
+  const card = cloneCard() as HTMLElement
+  populateCard(card, data)
+}
+
+function populateCard(card: HTMLElement, data: nftType) {
+  const title = card.querySelector('.title') as HTMLHeadingElement
+  title.textContent = data.title
+
+  const description = card.querySelector('.description') as HTMLParagraphElement
+  description.textContent = data.description
+
+  const creator = card.querySelector('.creator-name') as HTMLSpanElement
+  creator.textContent = data.creator
+
+  const img = card.querySelector('.main-image') as HTMLImageElement
+  img.src = data.img
+
+  const price = card.querySelector('.eth') as HTMLSpanElement
+  price.textContent = data.price
+
+  const expire = card.querySelector('.expire') as HTMLSpanElement
+  expire.textContent = data.expire
+
+  const avatar = card.querySelector('.avatar') as HTMLImageElement
+  avatar.src = data.avatar
+}
+
+nftsList.map((item) => {
+  return createCard(item)
+})
