@@ -1,1 +1,1 @@
-alert('config ok')
+// alert('config ok')
