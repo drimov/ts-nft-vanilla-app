@@ -59,3 +59,15 @@ const nftsList: Array<nftType> = [
     avatar: "/images/avatar/90.jpg",
   },
 ]
+
+function cloneCard() {
+  const card = document.querySelector('.main-card') as HTMLElement
+  const cardClone = card.cloneNode(true)
+
+  const cardContainer = document.querySelector('.card-container') as HTMLDivElement
+  return cardContainer.appendChild(cardClone)
+}
+
+const card1 = cloneCard()
+const card2 = cloneCard()
+const card3 = cloneCard()
