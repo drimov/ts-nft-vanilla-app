@@ -44,16 +44,24 @@ function populateCard(card: HTMLElement, data: nftType) {
   avatar.src = data.avatar
 }
 
+function handleChange(e: Event) {
+  const value = (e.target as HTMLInputElement).value
 
-clearCards()
-nftsList.map((item) => {
-  return createCard(item)
-})
-clearCards()
-nftsList.map((item) => {
-  return createCard(item)
-})
-clearCards()
-nftsList.map((item) => {
-  return createCard(item)
-})
+  const filteredList = nftsList.filter(nft => {
+    return nft.title.toLowerCase().includes(value.toLowerCase()) ||
+      nft.description.toLowerCase().includes(value.toLowerCase()) ||
+      nft.creator.toLowerCase().includes(value.toLowerCase())
+  })
+
+  init(filteredList)
+}
+
+function init(list: nftType[]) {
+
+  const input = document.querySelector('.input-search') as HTMLInputElement
+  input.addEventListener('input', handleChange)
+  clearCards()
+  list.map(nftData => createCard(nftData))
+}
+
+init(nftsList)
