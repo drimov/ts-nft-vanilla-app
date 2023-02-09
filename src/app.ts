@@ -56,7 +56,7 @@ function handleChange(e: Event) {
   init(filteredList)
 }
 
-function init(list: nftType[]) {
+function init(list = nftsList) {
 
   const input = document.querySelector('.input-search') as HTMLInputElement
   input.addEventListener('input', handleChange)
